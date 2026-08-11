@@ -29,7 +29,7 @@ Widget recentTransactionWidget({
       ),
       subtitle: Text(subTitle),
       trailing: Text(
-        "-\$$money",
+        '${money < 0 ? "-$money" : "+$money"}',
         style: GoogleFonts.dmSans(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     ),

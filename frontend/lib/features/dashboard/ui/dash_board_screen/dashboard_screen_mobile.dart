@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/features/dashboard/viewmodel/transaction_viewmodel.dart';
 import 'package:frontend/features/dashboard/widgets/dashboard_card_widget.dart';
 import 'package:frontend/features/dashboard/widgets/recent_transaction_card_widget.dart';
+import 'package:frontend/features/transaction/presentation/transaction_screen.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -70,7 +71,9 @@ class _DashboardScreenMobileState extends State<DashboardScreenMobile> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => TransactionScreen());
+                  },
                   child: Text(
                     "See all",
                     style: GoogleFonts.dmSans(color: Colors.black),

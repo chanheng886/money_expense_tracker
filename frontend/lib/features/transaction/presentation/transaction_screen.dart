@@ -9,8 +9,8 @@ class TransactionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveLayout(
-      mobileScreen: TransactionScreenMobile(),
-      desktopScreen: TransactionScreenDesktop(),
+      mobileScreen: const TransactionScreenMobile(),
+      desktopScreen: const TransactionScreenDesktop(),
     );
   }
 }
