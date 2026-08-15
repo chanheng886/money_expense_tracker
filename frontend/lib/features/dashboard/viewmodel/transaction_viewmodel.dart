@@ -4,6 +4,7 @@ import 'package:get/state_manager.dart';
 
 class TransactionViewmodel extends GetxController {
   final TransactionService _service = TransactionService();
+  var selectedFilter = "All".obs;
 
   var transactions = <Transaction>[].obs;
   var isLoading = false.obs;
@@ -26,5 +27,9 @@ class TransactionViewmodel extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void onFilterSelected(String filter) {
+    selectedFilter.value = filter;
   }
 }

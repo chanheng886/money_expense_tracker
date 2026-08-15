@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/features/dashboard/presentation/all_transaction_screen.dart';
 import 'package:frontend/features/dashboard/viewmodel/transaction_viewmodel.dart';
 import 'package:frontend/features/dashboard/widgets/dashboard_card_widget.dart';
 import 'package:frontend/features/dashboard/widgets/recent_transaction_card_widget.dart';
@@ -72,7 +73,7 @@ class _DashboardScreenMobileState extends State<DashboardScreenMobile> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => TransactionScreen());
+                    Get.to(() => AllTransactionScreen());
                   },
                   child: Text(
                     "See all",
