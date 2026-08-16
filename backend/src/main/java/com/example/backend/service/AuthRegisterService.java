@@ -73,4 +73,17 @@ public class AuthRegisterService {
 
     //     return authRegisterMapper.toResponse(save); 
     // }
+
+    //✅✅ User login 
+    // public AuthLoginResponseDTO userLogin(AuthRegisterRequestDTO dto){
+    //     Auth auth = authRegisterRepository
+    //         .findByEmail(dto.getEmail())
+    //         .orElseThrow(() -> new RuntimeException("email is not found! try another"));
+    //     if(!passwordEncoder.matches(dto.getPassword(), auth.getPassword())){
+    //         throw new RuntimeException("ivalid email or password! try again");
+    //     }
+    //     return authRegisterMapper.toLoginResponse(auth);   
+    // }
+
+    //✅✅ User login with JWT and Spring Security
 }

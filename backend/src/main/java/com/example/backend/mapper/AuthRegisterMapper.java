@@ -1,5 +1,6 @@
 package com.example.backend.mapper;
 import org.springframework.stereotype.Component;
+import com.example.backend.dtos.AuthDtos.AuthLoginResponseDTO;
 import com.example.backend.dtos.AuthDtos.AuthRegisterRequestDTO;
 import com.example.backend.dtos.AuthDtos.AuthRegisterResponseDTO;
 import com.example.backend.entity.Auth;
@@ -37,6 +38,16 @@ public class AuthRegisterMapper {
             .email(auth.getEmail())
             .role(Roles.USER.name())
             .phone(auth.getPhone())
+            .build();
+        }
+
+        //✅✅ To login response: response some basic information 
+        public AuthLoginResponseDTO toLoginResponse(Auth auth){
+            return AuthLoginResponseDTO.builder()
+            .id(auth.getId())
+            .email(auth.getEmail())
+            .password(auth.getPassword())
+            .role(auth.getRole())
             .build();
         }
 
