@@ -3,12 +3,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.backend.dtos.AuthDtos.AuthLoginResponseDTO;
 import com.example.backend.dtos.AuthDtos.AuthRegisterRequestDTO;
 import com.example.backend.dtos.AuthDtos.AuthRegisterResponseDTO;
 import com.example.backend.entity.Auth;
 import com.example.backend.enums.Roles;
 import com.example.backend.mapper.AuthRegisterMapper;
 import com.example.backend.repository.AuthRegisterRepository;
+import com.example.backend.security.JwtService;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -17,6 +21,7 @@ public class AuthRegisterService {
     private final AuthRegisterMapper authRegisterMapper;
     private final AuthRegisterRepository authRegisterRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     //✅✅ Create User By Admin
     public AuthRegisterResponseDTO createUser(AuthRegisterRequestDTO dto){
@@ -40,7 +45,7 @@ public class AuthRegisterService {
     //✅✅ Promote user to Admin
     public AuthRegisterResponseDTO promoteUser(Long id){
         Auth auth = authRegisterRepository.findById(id).orElseThrow(() -> new RuntimeException("Uer id with: " + id + "Not Found!!"));
-        auth.setRole(Roles.USER);
+        auth.setRole(Roles.ADMIN);
         Auth save = authRegisterRepository.save(auth);
        
         return authRegisterMapper.toResponse(save);
@@ -66,24 +71,23 @@ public class AuthRegisterService {
         return authRegisterMapper.toResponse(save); 
     }
 
-    //✅✅ User update account by them self
-    // public AuthRegisterResponseDTO userAccountUpdate(AuthRegisterRequestDTO dto){
-    //     Auth update = authRegisterMapper.toUpdate(dto);
-    //     Auth save = authRegisterRepository.save(update);
-
-    //     return authRegisterMapper.toResponse(save); 
-    // }
-
-    //✅✅ User login 
-    // public AuthLoginResponseDTO userLogin(AuthRegisterRequestDTO dto){
-    //     Auth auth = authRegisterRepository
-    //         .findByEmail(dto.getEmail())
-    //         .orElseThrow(() -> new RuntimeException("email is not found! try another"));
-    //     if(!passwordEncoder.matches(dto.getPassword(), auth.getPassword())){
-    //         throw new RuntimeException("ivalid email or password! try again");
-    //     }
-    //     return authRegisterMapper.toLoginResponse(auth);   
-    // }
 
     //✅✅ User login with JWT and Spring Security
+    public AuthLoginResponseDTO userLogin(AuthRegisterRequestDTO dto){
+        // find user by email
+        Auth auth = authRegisterRepository.findByEmail(dto.getEmail())
+            .orElseThrow(() -> new RuntimeException("Email not found!!"));
+
+        // check password
+        boolean passwordMatches = passwordEncoder.matches(dto.getPassword(), auth.getPassword());
+
+        if(!passwordMatches){
+            throw new RuntimeException("Invalid password, please try agian!");
+        }
+
+        // generate token jwt
+        String token = jwtService.generateToken(auth);
+
+        return authRegisterMapper.toLoginResponse(auth, token);
+    }
 }

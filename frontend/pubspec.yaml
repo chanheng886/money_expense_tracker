@@ -39,6 +39,7 @@ dependencies:
   cached_network_image: ^3.4.1
   font_awesome_flutter: ^11.0.0
   remixicon: ^4.9.3
+  intl: ^0.20.3
 
 dev_dependencies:
   flutter_test:

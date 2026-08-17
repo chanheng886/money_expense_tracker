@@ -45,18 +45,14 @@ public class AuthRegisterController {
     }
 
     //✅✅ Auth Register by themeself
-    @PostMapping("/user-create")
+    @PostMapping("/register")
     public AuthRegisterResponseDTO userRegister(@Valid @RequestBody AuthRegisterRequestDTO dto){
         return authRegisterService.userRegister(dto);
     }
+    //✅✅ Auth Login by user
 
-    //✅✅ Auth user update their account by themself
-    // @PutMapping("/me")
-    // public AuthRegisterResponseDTO userUpdateTheirAccount(@PathVariable Long id, @Valid @RequestBody AuthRegisterRequestDTO dto){
-    //     return authRegisterService.userAccountUpdate(id, dto); 
-    // }
-
-    //✅✅ User login
-    
-
+    @PostMapping("/login")
+    public AuthLoginResponseDTO loginByUser(@Valid @RequestBody AuthRegisterRequestDTO dto){
+        return authRegisterService.userLogin(dto);
+    }
 }

@@ -36,17 +36,17 @@ public class AuthRegisterMapper {
             .username(auth.getUsername())
             .gender(auth.getGender())
             .email(auth.getEmail())
-            .role(Roles.USER.name())
+            .role(auth.getRole().name())
             .phone(auth.getPhone())
             .build();
         }
 
         //✅✅ To login response: response some basic information 
-        public AuthLoginResponseDTO toLoginResponse(Auth auth){
+        public AuthLoginResponseDTO toLoginResponse(Auth auth, String token){
             return AuthLoginResponseDTO.builder()
             .id(auth.getId())
             .email(auth.getEmail())
-            .password(auth.getPassword())
+            .token(token)
             .role(auth.getRole())
             .build();
         }

@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/features/transaction/widgets/card_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ExpenseScreenMobile extends StatelessWidget {
-  const ExpenseScreenMobile({super.key});
+class IncomeScreenMobile extends StatelessWidget {
+  const IncomeScreenMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -154,13 +154,13 @@ class ExpenseScreenMobile extends StatelessWidget {
                 width: double.infinity,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Color(0xffEF4444),
+                  color: Color(0xff10B981),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: TextButton(
                   onPressed: () {},
                   child: Text(
-                    "Expense",
+                    "Income",
                     style: GoogleFonts.dmSans(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

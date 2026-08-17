@@ -5,7 +5,6 @@ import 'package:frontend/features/dashboard/presentation/all_transaction_screen.
 import 'package:frontend/features/dashboard/viewmodel/transaction_viewmodel.dart';
 import 'package:frontend/features/dashboard/widgets/dashboard_card_widget.dart';
 import 'package:frontend/features/dashboard/widgets/recent_transaction_card_widget.dart';
-import 'package:frontend/features/transaction/presentation/transaction_screen.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
