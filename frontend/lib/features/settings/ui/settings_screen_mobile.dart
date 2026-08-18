@@ -11,6 +11,10 @@ class SettingsScreenMobile extends StatefulWidget {
 class _SettingsScreenMobileState extends State<SettingsScreenMobile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Setting Screen Mobile')));
+    return Scaffold(
+      backgroundColor: Color(0xffF7F9FB),
+      appBar: AppBar(),
+      body: Container(),
+    );
   }
 }
