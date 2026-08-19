@@ -27,10 +27,25 @@ Widget recentTransactionWidget({
         overflow: TextOverflow.ellipsis,
         maxLines: 1,
       ),
-      subtitle: Text(subTitle),
+      subtitle: Text(subTitle, maxLines: 2, overflow: TextOverflow.ellipsis),
       trailing: Text(
-        '${money < 0 ? "-$money" : "+$money"}',
-        style: GoogleFonts.dmSans(fontSize: 16, fontWeight: FontWeight.bold),
+        money < 0
+            ? "-$money"
+            : money == 0
+            ? "$money"
+            : "+$money",
+        // style: money < 0 ? Color(0xffEF4444) : Color(0xff10B981),
+        style: money < 0
+            ? GoogleFonts.dmSans(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffEF4444),
+              )
+            : GoogleFonts.dmSans(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff10B981),
+              ),
       ),
     ),
   );

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/main_app.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +15,7 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
     super.initState();
 
     Future.delayed(Duration(seconds: 3), () {
-      Get.offAll(() => MainApp());
+      Get.offAllNamed('/mainapp');
     });
   }
 

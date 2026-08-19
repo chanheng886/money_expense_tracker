@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class MainApp extends StatelessWidget {
   MainApp({super.key});
-  final NavController controller = Get.put(NavController());
+  final NavController controller = Get.find<NavController>();
 
   @override
   Widget build(BuildContext context) {

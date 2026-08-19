@@ -3,6 +3,7 @@ import 'package:frontend/features/auth/user/presentation/profile_screen.dart';
 import 'package:frontend/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:frontend/features/splash/presentation/splash_screen.dart';
 import 'package:frontend/features/statistics/presentation/statistic_screen.dart';
+import 'package:frontend/features/transaction/binding/transaction_binding.dart';
 import 'package:frontend/main_app.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/splash',
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(name: '/mainapp', page: () => MainApp()),
+        GetPage(
+          name: '/mainapp',
+          page: () => MainApp(),
+          binding: TransactionBinding(),
+        ),
         GetPage(name: '/dashboard', page: () => const DashboardScreen()),
         GetPage(name: '/statistic', page: () => const StatisticScreen()),
         GetPage(name: '/profile', page: () => const ProfileScreen()),

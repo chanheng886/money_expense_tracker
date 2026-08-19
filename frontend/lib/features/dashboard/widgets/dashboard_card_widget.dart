@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/features/dashboard/widgets/transaction_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:remixicon/remixicon.dart';
 
-Widget dashBoardCard() {
+Widget dashBoardCard(double totalBalance, double income, double expense) {
   return Padding(
     padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
     child: Container(
@@ -38,7 +37,7 @@ Widget dashBoardCard() {
               ],
             ),
             Text(
-              "\$24,562.00",
+              "\$${totalBalance.toStringAsFixed(2)}",
               style: GoogleFonts.dmSans(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -51,14 +50,14 @@ Widget dashBoardCard() {
               children: [
                 transactionWidget(
                   title: "Income",
-                  subTitle: "+5,2400.00",
+                  subTitle: "\$${income.toStringAsFixed(2)}",
                   icon: FontAwesomeIcons.arrowDown,
                   iconColor: Colors.green,
                   boxColor: Colors.green.shade100,
                 ),
                 transactionWidget(
                   title: "Expense",
-                  subTitle: "-1,890.00",
+                  subTitle: "\$${expense.toStringAsFixed(2)}",
                   icon: FontAwesomeIcons.arrowUp,
                   iconColor: Colors.red,
                   boxColor: Colors.red.shade100,

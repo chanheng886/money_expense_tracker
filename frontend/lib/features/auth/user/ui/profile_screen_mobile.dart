@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/features/auth/user/widgets/card_widget.dart';
+import 'package:frontend/features/auth/user/widgets/setting_card_widget.dart';
+import 'package:frontend/features/settings/presentation/settings_screen.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreenMobile extends StatefulWidget {
@@ -116,7 +119,6 @@ class _ProfileScreenMobileState extends State<ProfileScreenMobile> {
                   "Top Category",
                   null,
                   FontAwesomeIcons.house,
-
                   null,
                   "Housing",
                 ),
@@ -135,7 +137,7 @@ class _ProfileScreenMobileState extends State<ProfileScreenMobile> {
             padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
             child: Container(
               width: double.infinity,
-              height: 300,
+              height: 240,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -146,6 +148,58 @@ class _ProfileScreenMobileState extends State<ProfileScreenMobile> {
                   ),
                 ],
                 borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  settingCardWidget(
+                    "Personal Information",
+                    FontAwesomeIcons.user,
+                    () => Get.to(
+                      Scaffold(
+                        body: SizedBox(
+                          child: Center(child: Text("Personal Information!")),
+                        ),
+                      ),
+                    ),
+                  ),
+                  settingCardWidget(
+                    "Setting",
+                    FontAwesomeIcons.gear,
+                    () => Get.to(SettingsScreen()),
+                  ),
+                  settingCardWidget(
+                    "Privacy & Security",
+                    FontAwesomeIcons.unlockKeyhole,
+                    () => SizedBox(),
+                  ),
+                  settingCardWidget(
+                    "Help & Supports",
+                    FontAwesomeIcons.circleQuestion,
+                    () => SizedBox(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
+            child: Container(
+              width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Color(0xffEF4444),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Log out",
+                  style: GoogleFonts.dmSans(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ),
