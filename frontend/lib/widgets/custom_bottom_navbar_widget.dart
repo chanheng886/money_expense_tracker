@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/viewmodel/nav_controller.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,8 +18,13 @@ class CustomBottomNavbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bgColor = isDark ? AppColors.darkCard : Colors.white;
+    final selectedBg = isDark ? AppColors.blue : const Color(0xff1E293B);
+    final unselectedColor = isDark ? AppColors.darkSecondaryText : Colors.black;
+
     return Container(
-      color: Colors.white,
+      color: bgColor,
       height: 65,
       child: Obx(
         () => Row(
@@ -33,7 +39,7 @@ class CustomBottomNavbarWidget extends StatelessWidget {
                 width: 70,
                 margin: const EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xff1E293B) : Colors.white,
+                  color: isSelected ? selectedBg : bgColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -41,14 +47,13 @@ class CustomBottomNavbarWidget extends StatelessWidget {
                   children: [
                     FaIcon(
                       item.icon,
-                      color: isSelected ? Colors.white : Colors.black,
+                      color: isSelected ? Colors.white : unselectedColor,
                     ),
-
                     Text(
                       item.label,
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
-                        color: isSelected ? Colors.white : Colors.black,
+                        color: isSelected ? Colors.white : unselectedColor,
                       ),
                     ),
                   ],
@@ -63,7 +68,7 @@ class CustomBottomNavbarWidget extends StatelessWidget {
 }
 
 class _NavItem {
-  final FaIconData icon; // 👈 use IconData here
+  final FaIconData icon;
   final String label;
   const _NavItem({required this.icon, required this.label});
 }

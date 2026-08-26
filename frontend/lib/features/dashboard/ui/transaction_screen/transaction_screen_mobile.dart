@@ -12,7 +12,6 @@ class TransactionScreenMobile extends GetView<TransactionViewmodel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF7F9FB),
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 10),
@@ -56,7 +55,6 @@ class TransactionScreenMobile extends GetView<TransactionViewmodel> {
             icon: FaIcon(FontAwesomeIcons.solidBell),
           ),
         ],
-        backgroundColor: Color(0xffF7F9FB),
       ),
       body: SingleChildScrollView(
         child: Column(

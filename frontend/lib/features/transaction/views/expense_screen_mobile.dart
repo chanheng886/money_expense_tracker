@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/features/transaction/models/transaction_model.dart';
 import 'package:frontend/features/transaction/viewmodels/transaction_viewmodel.dart';
 import 'package:get/get.dart';
@@ -14,45 +15,36 @@ class ExpenseScreenMobile extends GetView<TransactionViewmodel> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardColor = isDark ? AppColors.darkCard : Colors.white;
+    final borderColor = isDark ? AppColors.darkBorder : Colors.grey.shade200;
+    final shadowColor = isDark ? Colors.black26 : Colors.grey.shade300;
+    final hintColor = isDark ? AppColors.darkSecondaryText : Colors.grey.shade400;
+    final labelColor = isDark ? AppColors.darkSecondaryText : Colors.grey;
+
     return Scaffold(
-      backgroundColor: Color(0xffF7F9FB),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Text(
               "Amount",
               textAlign: TextAlign.center,
-              style: GoogleFonts.dmSans(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
-              ),
+              style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.bold, color: labelColor),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FaIcon(
-                  FontAwesomeIcons.dollarSign,
-                  color: Colors.grey.shade500,
-                ),
+                FaIcon(FontAwesomeIcons.dollarSign, color: labelColor),
                 SizedBox(
                   width: 120,
                   child: TextField(
                     controller: amountController,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade500,
-                    ),
+                    style: GoogleFonts.dmSans(fontSize: 34, fontWeight: FontWeight.bold, color: labelColor),
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: '0.00',
-                      hintStyle: GoogleFonts.dmSans(
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500,
-                      ),
+                      hintStyle: GoogleFonts.dmSans(fontSize: 34, fontWeight: FontWeight.bold, color: hintColor),
                     ),
                   ),
                 ),
@@ -63,138 +55,29 @@ class ExpenseScreenMobile extends GetView<TransactionViewmodel> {
               child: SizedBox(
                 height: 80,
                 child: Card(
-                  color: Color(0xffF7F9FB),
+                  color: cardColor,
                   child: ListTile(
                     leading: Container(
                       width: 50,
                       height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: FaIcon(FontAwesomeIcons.filter)),
+                      decoration: BoxDecoration(color: AppColors.expense, borderRadius: BorderRadius.circular(10)),
+                      child: const Center(child: FaIcon(FontAwesomeIcons.filter, color: Colors.white)),
                     ),
-                    title: Text(
-                      "Category",
-                      style: GoogleFonts.dmSans(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "Select Category",
-                      style: GoogleFonts.dmSans(fontSize: 16),
-                    ),
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: FaIcon(FontAwesomeIcons.angleRight),
-                    ),
+                    title: Text("Category", style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.bold, color: labelColor)),
+                    subtitle: Text("Select Category", style: GoogleFonts.dmSans(fontSize: 16)),
+                    trailing: IconButton(onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.angleRight)),
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
-              child: Container(
-                width: double.infinity,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.grey.shade200),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade300,
-                      blurRadius: 2,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Text(
-                          "Title",
-                          style: GoogleFonts.dmSans(fontSize: 18),
-                        ),
-                      ),
-                      SizedBox(
-                        child: TextField(
-                          controller: titleController,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            isDense: true,
-                            hintText: "Add titles...",
-                            hintStyle: GoogleFonts.dmSans(
-                              fontSize: 17,
-                              color: Colors.grey.shade400,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade300,
-                      blurRadius: 2,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                  border: Border.all(color: Colors.grey.shade200),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Note", style: GoogleFonts.dmSans(fontSize: 18)),
-                      SizedBox(
-                        height: 160,
-                        child: TextField(
-                          controller: noteController,
-                          expands: true,
-                          maxLines: null,
-                          decoration: InputDecoration(
-                            hintText: 'Add notes...',
-                            border: InputBorder.none,
-                            hintStyle: GoogleFonts.dmSans(
-                              fontSize: 16,
-                              color: Colors.grey.shade400,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            _buildInputCard(titleController, "Title", "Add titles...", cardColor, borderColor, shadowColor, hintColor),
+            _buildNoteCard(noteController, cardColor, borderColor, shadowColor, hintColor),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
               child: Container(
                 width: double.infinity,
                 height: 60,
-                decoration: BoxDecoration(
-                  color: Color(0xff10B981),
-                  borderRadius: BorderRadius.circular(15),
-                ),
+                decoration: BoxDecoration(color: AppColors.expense, borderRadius: BorderRadius.circular(15)),
                 child: TextButton(
                   onPressed: () async {
                     final transaction = TransactionModel(
@@ -208,16 +91,83 @@ class ExpenseScreenMobile extends GetView<TransactionViewmodel> {
                   },
                   child: Text(
                     "Expense",
-                    style: GoogleFonts.dmSans(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputCard(TextEditingController ctrl, String label, String hint, Color cardColor, Color borderColor, Color shadowColor, Color hintColor) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+      child: Container(
+        width: double.infinity,
+        height: 80,
+        decoration: BoxDecoration(
+          color: cardColor,
+          border: Border.all(color: borderColor),
+          boxShadow: [BoxShadow(color: shadowColor, blurRadius: 2, offset: const Offset(0, 2))],
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(padding: const EdgeInsets.only(top: 5), child: Text(label, style: GoogleFonts.dmSans(fontSize: 18))),
+              TextField(
+                controller: ctrl,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  isDense: true,
+                  hintText: hint,
+                  hintStyle: GoogleFonts.dmSans(fontSize: 17, color: hintColor),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNoteCard(TextEditingController ctrl, Color cardColor, Color borderColor, Color shadowColor, Color hintColor) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+      child: Container(
+        width: double.infinity,
+        height: 200,
+        decoration: BoxDecoration(
+          color: cardColor,
+          boxShadow: [BoxShadow(color: shadowColor, blurRadius: 2, offset: const Offset(0, 2))],
+          border: Border.all(color: borderColor),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Note", style: GoogleFonts.dmSans(fontSize: 18)),
+              Expanded(
+                child: TextField(
+                  controller: ctrl,
+                  expands: true,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    hintText: 'Add notes...',
+                    border: InputBorder.none,
+                    hintStyle: GoogleFonts.dmSans(fontSize: 16, color: hintColor),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

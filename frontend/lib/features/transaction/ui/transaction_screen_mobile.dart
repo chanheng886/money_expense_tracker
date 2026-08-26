@@ -18,9 +18,7 @@ class _TransactionScreenMobileState extends State<TransactionScreenMobile> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Color(0xffF7F9FB),
         appBar: AppBar(
-          backgroundColor: Color(0xffF7F9FB),
           title: Text(
             "Add Transactions",
             style: GoogleFonts.dmSans(

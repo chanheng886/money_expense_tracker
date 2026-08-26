@@ -14,9 +14,7 @@ class DashboardScreenMobile extends GetView<TransactionViewmodel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF7F9FB),
       appBar: AppBar(
-        backgroundColor: Color(0xffF7F9FB),
         leading: Padding(
           padding: const EdgeInsets.only(left: 10),
           child: CircleAvatar(

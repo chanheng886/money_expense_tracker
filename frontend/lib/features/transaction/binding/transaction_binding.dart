@@ -1,3 +1,4 @@
+import 'package:frontend/features/statistics/viewmodels/statistics_viewmodel.dart';
 import 'package:frontend/features/transaction/repositories/transaction_repository.dart';
 import 'package:frontend/features/transaction/viewmodels/transaction_viewmodel.dart';
 import 'package:frontend/viewmodel/nav_controller.dart';
@@ -10,6 +11,9 @@ class TransactionBinding extends Bindings {
     Get.lazyPut<TransactionRepository>(() => TransactionRepository());
     Get.lazyPut<TransactionViewmodel>(
       () => TransactionViewmodel(Get.find<TransactionRepository>()),
+    );
+    Get.lazyPut<StatisticsViewmodel>(
+      () => StatisticsViewmodel(Get.find<TransactionViewmodel>()),
     );
   }
 }
