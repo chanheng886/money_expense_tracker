@@ -27,23 +27,32 @@ Widget recentTransactionWidget({
             child: Center(
               child: FaIcon(
                 icon,
-                color: isDark ? AppColors.darkPrimaryText : const Color(0xff45474C),
+                color: isDark
+                    ? AppColors.darkPrimaryText
+                    : const Color(0xff45474C),
               ),
             ),
           ),
           title: Text(
             title,
-            style: GoogleFonts.dmSans(fontSize: 16, fontWeight: FontWeight.bold),
+            style: GoogleFonts.dmSans(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
-          subtitle: Text(subTitle, maxLines: 2, overflow: TextOverflow.ellipsis),
+          subtitle: Text(
+            subTitle,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
           trailing: Text(
             money < 0
                 ? "-$money"
                 : money == 0
-                    ? "$money"
-                    : "+$money",
+                ? "$money"
+                : "+$money",
             style: GoogleFonts.dmSans(
               fontSize: 16,
               fontWeight: FontWeight.bold,
