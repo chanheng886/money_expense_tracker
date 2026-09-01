@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreenDesktop extends StatefulWidget {
@@ -11,6 +10,6 @@ class ProfileScreenDesktop extends StatefulWidget {
 class _ProfileScreenDesktopState extends State<ProfileScreenDesktop> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("Profile Screen Desktop")));
+    return const Scaffold(body: Center(child: Text("Profile Screen Desktop")));
   }
 }

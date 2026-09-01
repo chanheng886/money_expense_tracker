@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/core/theme/app_colors.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:frontend/core/theme/app_theme.dart';
 
 Widget recentTransactionWidget({
   FaIconData? icon,
   required String title,
   required String subTitle,
   required double money,
+  String? type,
 }) {
+  final bool isExpense =
+      (type != null && type.toLowerCase() == 'expense') || money < 0;
+  final double absAmount = money.abs();
+  final String formattedAmount = isExpense
+      ? "-\$${absAmount.toStringAsFixed(2)}"
+      : money == 0
+          ? "\$${absAmount.toStringAsFixed(2)}"
+          : "+\$${absAmount.toStringAsFixed(2)}";
+
   return Builder(
     builder: (context) {
       final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -21,21 +31,28 @@ Widget recentTransactionWidget({
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: isDark ? AppColors.darkBorder : Colors.grey.shade400,
+              color: isDark
+                  ? AppColors.darkBorder
+                  : (isExpense
+                      ? AppColors.expense.withValues(alpha: 0.12)
+                      : AppColors.income.withValues(alpha: 0.12)),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: FaIcon(
-                icon,
-                color: isDark
-                    ? AppColors.darkPrimaryText
-                    : const Color(0xff45474C),
+                icon ??
+                    (isExpense
+                        ? FontAwesomeIcons.arrowUp
+                        : FontAwesomeIcons.arrowDown),
+                color: isExpense ? AppColors.expense : AppColors.income,
+                size: 20,
               ),
             ),
           ),
           title: Text(
             title,
-            style: GoogleFonts.dmSans(
+            style: AppTheme.font(
+              context,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -44,19 +61,17 @@ Widget recentTransactionWidget({
           ),
           subtitle: Text(
             subTitle,
+            style: AppTheme.font(context, fontSize: 13),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
           trailing: Text(
-            money < 0
-                ? "-$money"
-                : money == 0
-                ? "$money"
-                : "+$money",
-            style: GoogleFonts.dmSans(
+            formattedAmount,
+            style: AppTheme.font(
+              context,
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: money < 0 ? AppColors.expense : AppColors.income,
+              color: isExpense ? AppColors.expense : AppColors.income,
             ),
           ),
         ),

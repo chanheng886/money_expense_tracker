@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
   AppTheme._();
 
-  static ThemeData get light => ThemeData(
+  static TextStyle font(
+    BuildContext? context, {
+    bool? isKhmer,
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+    TextOverflow? overflow,
+    double? height,
+    double? letterSpacing,
+  }) {
+    final khmer = isKhmer ?? (Get.locale?.languageCode == 'km');
+    if (khmer) {
+      return GoogleFonts.kantumruyPro(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        color: color,
+        height: height,
+        letterSpacing: letterSpacing,
+      );
+    }
+    return GoogleFonts.dmSans(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+      height: height,
+      letterSpacing: letterSpacing,
+    );
+  }
+
+  static ThemeData lightTheme({bool isKhmer = false}) => ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: AppColors.lightBackground,
         appBarTheme: const AppBarTheme(
@@ -15,7 +45,10 @@ class AppTheme {
           scrolledUnderElevation: 0,
         ),
         cardColor: AppColors.lightCard,
-        textTheme: GoogleFonts.dmSansTextTheme().apply(
+        textTheme: (isKhmer
+                ? GoogleFonts.kantumruyProTextTheme()
+                : GoogleFonts.dmSansTextTheme())
+            .apply(
           bodyColor: AppColors.lightPrimaryText,
           displayColor: AppColors.lightPrimaryText,
         ),
@@ -29,7 +62,7 @@ class AppTheme {
         ),
       );
 
-  static ThemeData get dark => ThemeData(
+  static ThemeData darkTheme({bool isKhmer = false}) => ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.darkBackground,
         appBarTheme: const AppBarTheme(
@@ -39,9 +72,10 @@ class AppTheme {
           scrolledUnderElevation: 0,
         ),
         cardColor: AppColors.darkCard,
-        textTheme: GoogleFonts.dmSansTextTheme(
-          ThemeData.dark().textTheme,
-        ).apply(
+        textTheme: (isKhmer
+                ? GoogleFonts.kantumruyProTextTheme(ThemeData.dark().textTheme)
+                : GoogleFonts.dmSansTextTheme(ThemeData.dark().textTheme))
+            .apply(
           bodyColor: AppColors.darkPrimaryText,
           displayColor: AppColors.darkPrimaryText,
         ),
@@ -54,4 +88,10 @@ class AppTheme {
           onSurface: AppColors.darkPrimaryText,
         ),
       );
+
+  // Default getters
+  static ThemeData get light =>
+      lightTheme(isKhmer: Get.locale?.languageCode == 'km');
+  static ThemeData get dark =>
+      darkTheme(isKhmer: Get.locale?.languageCode == 'km');
 }

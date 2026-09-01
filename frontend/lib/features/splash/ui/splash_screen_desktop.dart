@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreenDesktop extends StatefulWidget {
@@ -11,6 +10,8 @@ class SplashScreenDesktop extends StatefulWidget {
 class _SplashScreenDesktopState extends State<SplashScreenDesktop> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("Splash Screen Desktop")));
+    return const Scaffold(
+      body: Center(child: Text("Splash Screen Desktop")),
+    );
   }
 }

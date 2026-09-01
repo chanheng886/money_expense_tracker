@@ -1,4 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:frontend/core/localization/app_translations.dart';
+import 'package:frontend/core/localization/language_controller.dart';
 import 'package:frontend/core/theme/app_theme.dart';
 import 'package:frontend/core/theme/theme_controller.dart';
 import 'package:frontend/features/auth/user/presentation/profile_screen.dart';
@@ -10,7 +12,7 @@ import 'package:frontend/main_app.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,12 +21,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeController = Get.put(ThemeController());
+    final languageController = Get.put(LanguageController());
 
     return Obx(
       () => GetMaterialApp(
         initialRoute: '/splash',
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
+        translations: AppTranslations(),
+        locale: languageController.currentLocale.value,
+        fallbackLocale: const Locale('en', 'US'),
+        theme: AppTheme.lightTheme(isKhmer: languageController.isKhmer),
+        darkTheme: AppTheme.darkTheme(isKhmer: languageController.isKhmer),
         themeMode: themeController.themeMode.value,
         getPages: [
           GetPage(name: '/splash', page: () => const SplashScreen()),

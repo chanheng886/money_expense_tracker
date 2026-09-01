@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/theme/app_theme.dart';
 import 'package:get/route_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreenMobile extends StatefulWidget {
   const SplashScreenMobile({super.key});
@@ -14,7 +14,7 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Get.offAllNamed('/mainapp');
     });
   }
@@ -25,7 +25,11 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
       body: Center(
         child: Text(
           'Money Expense Tracker',
-          style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.bold),
+          style: AppTheme.font(
+            context,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

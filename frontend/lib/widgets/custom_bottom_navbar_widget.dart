@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/core/theme/app_colors.dart';
+import 'package:frontend/core/theme/app_theme.dart';
 import 'package:frontend/viewmodel/nav_controller.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomBottomNavbarWidget extends StatelessWidget {
   CustomBottomNavbarWidget({super.key});
   final NavController controller = Get.put(NavController());
-
-  final List<_NavItem> items = const [
-    _NavItem(icon: FontAwesomeIcons.cube, label: "Dashboard"),
-    _NavItem(icon: FontAwesomeIcons.chartLine, label: "Stats"),
-    _NavItem(icon: FontAwesomeIcons.circlePlus, label: "Add"),
-    _NavItem(icon: FontAwesomeIcons.user, label: "Me"),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +15,13 @@ class CustomBottomNavbarWidget extends StatelessWidget {
     final bgColor = isDark ? AppColors.darkCard : Colors.white;
     final selectedBg = isDark ? AppColors.blue : const Color(0xff1E293B);
     final unselectedColor = isDark ? AppColors.darkSecondaryText : Colors.black;
+
+    final items = [
+      _NavItem(icon: FontAwesomeIcons.cube, labelKey: 'nav_dashboard'),
+      _NavItem(icon: FontAwesomeIcons.chartLine, labelKey: 'nav_statistics'),
+      _NavItem(icon: FontAwesomeIcons.circlePlus, labelKey: 'amount'),
+      _NavItem(icon: FontAwesomeIcons.user, labelKey: 'nav_profile'),
+    ];
 
     return Container(
       color: bgColor,
@@ -47,14 +47,19 @@ class CustomBottomNavbarWidget extends StatelessWidget {
                   children: [
                     FaIcon(
                       item.icon,
+                      size: 16,
                       color: isSelected ? Colors.white : unselectedColor,
                     ),
+                    const SizedBox(height: 2),
                     Text(
-                      item.label,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 12,
+                      item.labelKey.tr,
+                      style: AppTheme.font(
+                        context,
+                        fontSize: 11,
                         color: isSelected ? Colors.white : unselectedColor,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -69,6 +74,6 @@ class CustomBottomNavbarWidget extends StatelessWidget {
 
 class _NavItem {
   final FaIconData icon;
-  final String label;
-  const _NavItem({required this.icon, required this.label});
+  final String labelKey;
+  const _NavItem({required this.icon, required this.labelKey});
 }

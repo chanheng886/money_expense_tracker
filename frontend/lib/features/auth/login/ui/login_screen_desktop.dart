@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreenDesktop extends StatefulWidget {
@@ -11,6 +10,6 @@ class LoginScreenDesktop extends StatefulWidget {
 class _LoginScreenDesktopState extends State<LoginScreenDesktop> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("Login Screen Desktop")));
+    return const Scaffold(body: Center(child: Text("Login Screen Desktop")));
   }
 }
